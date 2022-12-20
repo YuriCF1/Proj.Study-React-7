@@ -8,6 +8,9 @@ function App() {
   //Aula 1
   const [products, setProducts] = useState([]);
 
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+
   //Resgatando dados
   useEffect(() => {
     async function fetchData() {
@@ -19,8 +22,12 @@ function App() {
     }
 
     fetchData();
-  }, []);
-  //Nao há nenhuma depedência específica aqui
+  }, []); //Nao há nenhuma depedência específica aqui
+
+  // Aula 2 - Adição de produtos
+  const handleSubmit = async (e) => {
+    e.prevenDefault();
+  };
 
   console.log(products);
   return (
@@ -33,6 +40,29 @@ function App() {
           </li>
         ))}
       </ul>
+      <div className="add-product">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Nome:
+            <input
+              type="text"
+              value={name}
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Preço:
+            <input
+              type="number"
+              value={price}
+              name="price"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </label>
+          <input type="submit" value="Criar"/>
+        </form>
+      </div>
     </div>
   );
 }
