@@ -26,12 +26,28 @@ function App() {
 
   // Aula 2 - Adição de produtos
   const handleSubmit = async (e) => {
-    e.prevenDefault();
+    e.preventDefault()
+    // // Como os states têm o mesmo nome da chave to objeto, não precis acolocar 'name = name'
+    const product = {
+      name,
+      price
+    }
+
+    const res = await fetch(url, { //Segundo parâmetro, diz como vai ser a requisição. O GET é padrão
+      method: "POST",
+      headers: { //Transmite na transmissão que tipo de conteúdo está sendo manipulado
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(product) // Os dados sendo passados, porém o dado principal da requisição é JSON, por isso o dado precisa ir no mesmo formato
+    })
+
+    console.log(product);
+
   };
 
   console.log(products);
   return (
-    <div>
+    <div className="App">
       <h1>Lista de produtos</h1>
       <ul>
         {products.map((product) => (
