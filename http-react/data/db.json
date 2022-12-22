@@ -27,6 +27,21 @@
       "name": "Bermuda",
       "price": "26",
       "id": 6
+    },
+    {
+      "name": "teclado",
+      "price": "110",
+      "id": 7
+    },
+    {
+      "name": "Meia",
+      "price": "13",
+      "id": 8
+    },
+    {
+      "name": "Caderno",
+      "price": "14",
+      "id": 9
     }
   ]
 }

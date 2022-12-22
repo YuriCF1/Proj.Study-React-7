@@ -43,6 +43,12 @@ function App() {
 
     console.log(product);
 
+    //Aula - 6 = Carregamento dinâmico
+    const addedProduct  = await res.json() //Transformando o rest em um objeto. Pois anteriormente ele estava como string em json
+    setProducts((prevProducts) => [...prevProducts, addedProduct])
+
+    setName('')
+    setPrice('')
   };
 
   console.log(products);
