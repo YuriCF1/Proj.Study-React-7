@@ -2,27 +2,38 @@ import "./App.css";
 import React from "react";
 
 import { useState, useEffect } from "react";
+
+// Aula 7 - Custom Hook
+import { useFetch } from "./hooks/useFetch";
+
+
 const url = "http://localhost:3000/products";
 
 function App() {
   //Aula 1
   const [products, setProducts] = useState([]);
+  
+  //Aula 4 - Custom hook
+  const {data : items} = useFetch(url) //Diz o que está esperando de retorno, e depois diz de onde tá vindo
+  // Renomeando a propriedade
+
+  console.log(items);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
 
   //Resgatando dados
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(url);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch(url);
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      setProducts(data);
-    }
+  //     setProducts(data);
+  //   }
 
-    fetchData();
-  }, []); //Nao há nenhuma depedência específica aqui
+  //   fetchData();
+  // }, []); //Nao há nenhuma depedência específica aqui
 
   // Aula 2 - Adição de produtos
   const handleSubmit = async (e) => {
@@ -56,7 +67,8 @@ function App() {
     <div className="App">
       <h1>Lista de produtos</h1>
       <ul>
-        {products.map((product) => (
+        {/* {products.map((product) => ( */}
+        {items && items.map((product) => ( //Inicialmente, o items é nulo, o if resolveu
           <li key={product.id}>
             {product.name} - R$: {product.price}
           </li>
