@@ -47,6 +47,31 @@
       "name": "Caneta",
       "price": "12",
       "id": 10
+    },
+    {
+      "name": "Mouse",
+      "price": "139",
+      "id": 11
+    },
+    {
+      "name": "Tenis",
+      "price": "220",
+      "id": 12
+    },
+    {
+      "name": "Brinco",
+      "price": "49",
+      "id": 13
+    },
+    {
+      "name": "Calça",
+      "price": "120",
+      "id": 14
+    },
+    {
+      "name": "Chinelo ",
+      "price": "123",
+      "id": 15
     }
   ]
 }

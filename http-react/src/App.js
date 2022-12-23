@@ -3,6 +3,7 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 
+
 // Aula 7 - Custom Hook
 import { useFetch } from "./hooks/useFetch";
 
@@ -13,15 +14,15 @@ function App() {
   //Aula 1
   const [products, setProducts] = useState([]);
   
+  // Método 2 - Custom Rook
   //Aula 4 - Custom hook
-  const {data : items} = useFetch(url) //Diz o que está esperando de retorno, e depois diz de onde tá vindo
+  const {data : items, httpConfig} = useFetch(url) //Diz o que está esperando de retorno, e depois diz de onde tá vindo
   // Renomeando a propriedade
-
-  console.log(items);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
 
+  // Método 1 - Rook nativo
   //Resgatando dados
   // useEffect(() => {
   //   async function fetchData() {
@@ -44,25 +45,27 @@ function App() {
       price
     }
 
-    const res = await fetch(url, { //Segundo parâmetro, diz como vai ser a requisição. O GET é padrão
-      method: "POST",
-      headers: { //Transmite na transmissão que tipo de conteúdo está sendo manipulado
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(product) // Os dados sendo passados, porém o dado principal da requisição é JSON, por isso o dado precisa ir no mesmo formato
-    })
+    // const res = await fetch(url, { //Segundo parâmetro, diz como vai ser a requisição. O GET é padrão
+    //   method: "POST",
+    //   headers: { //Transmite na transmissão que tipo de conteúdo está sendo manipulado
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(product) // Os dados sendo passados, porém o dado principal da requisição é JSON, por isso o dado precisa ir no mesmo formato
+    // })
 
-    console.log(product);
+    // console.log(product);
 
-    //Aula - 6 = Carregamento dinâmico
-    const addedProduct  = await res.json() //Transformando o rest em um objeto. Pois anteriormente ele estava como string em json
-    setProducts((prevProducts) => [...prevProducts, addedProduct])
+    // //Aula - 6 = Carregamento dinâmico
+    // const addedProduct  = await res.json() //Transformando o rest em um objeto. Pois anteriormente ele estava como string em json
+    // setProducts((prevProducts) => [...prevProducts, addedProduct])
+    
+    httpConfig(product, "POST")
 
     setName('')
     setPrice('')
   };
 
-  console.log(products);
+  // console.log(products);
   return (
     <div className="App">
       <h1>Lista de produtos</h1>
