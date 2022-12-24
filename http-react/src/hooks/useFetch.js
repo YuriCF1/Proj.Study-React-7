@@ -11,6 +11,10 @@ export const useFetch = (url) => {
   const [method, setMethod] = useState(null); //Responsável para configurar o método, GET ou POST
   const [callFetch, setCallFetch] = useState(false); //Dizer quando o fetch for alterado. Usado como dependência
   
+  // Aula 9 - Loading
+  const [loading, setLoading] = useState(false)
+
+
   // ___________________________________________________________________________________Configuração____________________________________________________________
   const httpConfig = (data, method) => {
     if (method === "POST") {
@@ -30,12 +34,16 @@ export const useFetch = (url) => {
   // GET QUANDO O POST FOR CONCLUÍDO
   useEffect(() => {
     const fetchData = async () => {
+      // Aula 9 - loading
+      setLoading(true)
       const res = await fetch(url);
       const inJson = await res.json();
-
+      
       setData(inJson);
-    };
 
+      setLoading(false);
+    };
+    
     fetchData();
   }, [url, callFetch]);
 
@@ -58,5 +66,5 @@ export const useFetch = (url) => {
   
   // ______________________________________________________________________________Retorno_________________________________________________________________
   //Só dá para exportar uma coisa nos hooks, por isso usa-se o retorno
-  return { data, httpConfig }; // Já que o terceiro hook é dependente da configuração, só precisa exportar o primeiro. Caso o primeiro mude, o terceiro reinicia
+  return { data, httpConfig, loading }; // Já que o terceiro hook é dependente da configuração, só precisa exportar o primeiro. Caso o primeiro mude, o terceiro reinicia
 };

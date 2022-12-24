@@ -3,20 +3,18 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 
-
 // Aula 7 - Custom Hook
 import { useFetch } from "./hooks/useFetch";
-
 
 const url = "http://localhost:3000/products";
 
 function App() {
   //Aula 1
   const [products, setProducts] = useState([]);
-  
+
   // Método 2 - Custom Rook
   //Aula 4 - Custom hook
-  const {data : items, httpConfig} = useFetch(url) //Diz o que está esperando de retorno, e depois diz de onde tá vindo
+  const { data: items, httpConfig, loading } = useFetch(url); //Diz o que está esperando de retorno, e depois diz de onde tá vindo
   // Renomeando a propriedade
 
   const [name, setName] = useState("");
@@ -38,12 +36,12 @@ function App() {
 
   // Aula 2 - Adição de produtos
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // // Como os states têm o mesmo nome da chave to objeto, não precis acolocar 'name = name'
     const product = {
       name,
-      price
-    }
+      price,
+    };
 
     // const res = await fetch(url, { //Segundo parâmetro, diz como vai ser a requisição. O GET é padrão
     //   method: "POST",
@@ -58,25 +56,33 @@ function App() {
     // //Aula - 6 = Carregamento dinâmico
     // const addedProduct  = await res.json() //Transformando o rest em um objeto. Pois anteriormente ele estava como string em json
     // setProducts((prevProducts) => [...prevProducts, addedProduct])
-    
-    httpConfig(product, "POST")
 
-    setName('')
-    setPrice('')
+    httpConfig(product, "POST");
+
+    setName("");
+    setPrice("");
   };
 
   // console.log(products);
   return (
     <div className="App">
       <h1>Lista de produtos</h1>
-      <ul>
-        {/* {products.map((product) => ( */}
-        {items && items.map((product) => ( //Inicialmente, o items é nulo, o if resolveu
-          <li key={product.id}>
-            {product.name} - R$: {product.price}
-          </li>
-        ))}
-      </ul>
+      {/* Aula 9 - loading */}
+      {/* Substituir depois pela animação de carregamento? */}
+      {loading && <p>Carregando os dados...</p>}
+      {!loading && (
+        <ul>
+          {/* {products.map((product) => ( */}
+          {items &&
+            items.map((
+              product //Inicialmente, o items é nulo, o if resolveu
+            ) => (
+              <li key={product.id}>
+                {product.name} - R$: {product.price}
+              </li>
+            ))}
+        </ul>
+      )}
       <div className="add-product">
         <form onSubmit={handleSubmit}>
           <label>
@@ -97,7 +103,7 @@ function App() {
               onChange={(e) => setPrice(e.target.value)}
             />
           </label>
-          <input type="submit" value="Criar"/>
+          <input type="submit" value="Criar" />
         </form>
       </div>
     </div>
