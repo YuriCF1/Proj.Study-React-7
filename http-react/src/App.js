@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 // Aula 7 - Custom Hook
 import { useFetch } from "./hooks/useFetch";
 
-const url = "http://localhost:3000/products";
+const url = "http://localhost:8000/products";
 
 function App() {
   //Aula 1
