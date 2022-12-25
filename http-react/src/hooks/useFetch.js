@@ -10,10 +10,9 @@ export const useFetch = (url) => {
   const [config, setConfig] = useState(null); //Responsável para configurar o método, cabeçalhos...
   const [method, setMethod] = useState(null); //Responsável para configurar o método, GET ou POST
   const [callFetch, setCallFetch] = useState(false); //Dizer quando o fetch for alterado. Usado como dependência
-  
-  // Aula 9 - Loading
-  const [loading, setLoading] = useState(false)
 
+  // Aula 9 - Loading
+  const [loading, setLoading] = useState(false);
 
   // ___________________________________________________________________________________Configuração____________________________________________________________
   const httpConfig = (data, method) => {
@@ -26,7 +25,7 @@ export const useFetch = (url) => {
         body: JSON.stringify(data),
       });
 
-      setMethod(method)
+      setMethod(method);
     }
   };
 
@@ -35,15 +34,15 @@ export const useFetch = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       // Aula 9 - loading
-      setLoading(true)
+      setLoading(true);
       const res = await fetch(url);
       const inJson = await res.json();
-      
+
       setData(inJson);
 
       setLoading(false);
     };
-    
+
     fetchData();
   }, [url, callFetch]);
 
@@ -53,17 +52,17 @@ export const useFetch = (url) => {
     const httpRequest = async () => {
       if (method === "POST") {
         let fetchOptions = [url, config]; //Pode pegar uma url diferente e uma configuração diferente
-        
+
         const res = await fetch(...fetchOptions);
         const json = await res.json();
-        
+
         setCallFetch(json);
       }
     };
-    
+
     httpRequest();
   }, [config]);
-  
+
   // ______________________________________________________________________________Retorno_________________________________________________________________
   //Só dá para exportar uma coisa nos hooks, por isso usa-se o retorno
   return { data, httpConfig, loading }; // Já que o terceiro hook é dependente da configuração, só precisa exportar o primeiro. Caso o primeiro mude, o terceiro reinicia
