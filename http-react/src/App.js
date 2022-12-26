@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 // Aula 7 - Custom Hook
 import { useFetch } from "./hooks/useFetch";
 
-const url = "http://localhost:8000/products";
+const url = "http://localhost:300/products";
 
 function App() {
   //Aula 1
@@ -14,7 +14,7 @@ function App() {
 
   // Método 2 - Custom Rook
   //Aula 4 - Custom hook
-  const { data: items, httpConfig, loading } = useFetch(url); //Diz o que está esperando de retorno, e depois diz de onde tá vindo
+  const { data: items, httpConfig, loading, error} = useFetch(url); //Diz o que está esperando de retorno, e depois diz de onde tá vindo
   // Renomeando a propriedade
 
   const [name, setName] = useState("");
@@ -69,8 +69,19 @@ function App() {
       <h1>Lista de produtos</h1>
       {/* Aula 9 - loading */}
       {/* Substituir depois pela animação de carregamento? */}
-      {loading && <p>Carregando os dados...</p>}
-      {!loading && (
+      {/* {loading && <p>Carregando os dados...</p>} */}
+      {/* <div>  */}
+      {(() => {
+        if (loading && !error) {
+          return (
+            <p>Carregando os dados...</p>
+          )} else {
+            return <p>{error}</p>
+          }
+      })()}
+    {/* </div> */}
+      {/* {error && <p>{error}</p>} */}
+      {!error && (
         <ul>
           {/* {products.map((product) => ( */}
           {items &&

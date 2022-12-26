@@ -14,6 +14,9 @@ export const useFetch = (url) => {
   // Aula 9 - Loading
   const [loading, setLoading] = useState(false);
 
+  // Aula 10 - Tratando erro
+  const [error, setError] = useState(null);
+
   // ___________________________________________________________________________________Configuração____________________________________________________________
   const httpConfig = (data, method) => {
     if (method === "POST") {
@@ -35,12 +38,24 @@ export const useFetch = (url) => {
     const fetchData = async () => {
       // Aula 9 - loading
       setLoading(true);
-      const res = await fetch(url);
-      const inJson = await res.json();
+      // const res = await fetch(url);
+      // const inJson = await res.json();
 
-      setData(inJson);
+      // setData(inJson);
 
-      setLoading(false);
+      // setLoading(false);
+
+      try {
+        const res = await fetch(url);
+        const inJson = await res.json();
+
+        setData(inJson);
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error.message); //Mostrar a mensagem de erro
+        setError("Houve algum erro na tentativa de carregamento dos dados")
+      }
     };
 
     fetchData();
@@ -65,5 +80,5 @@ export const useFetch = (url) => {
 
   // ______________________________________________________________________________Retorno_________________________________________________________________
   //Só dá para exportar uma coisa nos hooks, por isso usa-se o retorno
-  return { data, httpConfig, loading }; // Já que o terceiro hook é dependente da configuração, só precisa exportar o primeiro. Caso o primeiro mude, o terceiro reinicia
+  return { data, httpConfig, loading, error }; // Já que o terceiro hook é dependente da configuração, só precisa exportar o primeiro. Caso o primeiro mude, o terceiro reinicia
 };
