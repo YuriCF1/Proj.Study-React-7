@@ -23,7 +23,7 @@
     "server": "json-server --watch data/db.json",
     "all": "json-server --watch data/db.json --port 8000 \"react-scripts start\"",
     "al": "json-server --watch data/db.json --port 8000 && react-scripts start",
-    "ev": "start npm run server --port 8000 && start npm start"
+    "ev": "start npm run server --port 8000 && set PORT=3001 && start npm start"
   },
   "eslintConfig": {
     "extends": [
