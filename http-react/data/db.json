@@ -1,87 +1,9 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Camisa",
-      "price": 59.9
-    },
-    {
-      "id": 2,
-      "name": "Calça vermelha",
-      "price": 90
-    },
-    {
-      "id": 3,
-      "name": "Boné aba reta",
-      "price": 29.9
-    },
-    {
-      "id": 4
-    },
-    {
-      "name": "Calça ",
-      "price": "92",
-      "id": 5
-    },
-    {
-      "name": "Bermuda",
-      "price": "26",
-      "id": 6
-    },
-    {
-      "name": "teclado",
-      "price": "110",
-      "id": 7
-    },
-    {
-      "name": "Meia",
-      "price": "13",
-      "id": 8
-    },
-    {
-      "name": "Caderno",
-      "price": "14",
-      "id": 9
-    },
-    {
-      "name": "Caneta",
-      "price": "12",
-      "id": 10
-    },
-    {
-      "name": "Mouse",
-      "price": "139",
-      "id": 11
-    },
-    {
-      "name": "Tenis",
-      "price": "220",
-      "id": 12
-    },
-    {
-      "name": "Brinco",
-      "price": "49",
-      "id": 13
-    },
-    {
-      "name": "Calça",
-      "price": "120",
-      "id": 14
-    },
-    {
-      "name": "Chinelo ",
-      "price": "123",
-      "id": 15
-    },
-    {
-      "name": "Rtx 3060",
-      "price": "1000",
-      "id": 16
-    },
-    {
-      "name": "Rtx 3070",
-      "price": "1200",
-      "id": 17
+      "name": "PC GAMER",
+      "price": "900",
+      "id": 1
     }
   ]
 }

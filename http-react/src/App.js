@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 // Aula 7 - Custom Hook
 import { useFetch } from "./hooks/useFetch";
 
-const url = "http://localhost:300/products";
+const url = "http://localhost:3000/products";
 
 function App() {
   //Aula 1
@@ -14,7 +14,7 @@ function App() {
 
   // Método 2 - Custom Rook
   //Aula 4 - Custom hook
-  const { data: items, httpConfig, loading, error} = useFetch(url); //Diz o que está esperando de retorno, e depois diz de onde tá vindo
+  const { data: items, httpConfig, loading, error } = useFetch(url); //Diz o que está esperando de retorno, e depois diz de onde tá vindo
   // Renomeando a propriedade
 
   const [name, setName] = useState("");
@@ -63,7 +63,12 @@ function App() {
     setPrice("");
   };
 
-  // console.log(products);
+  // Aula 11 - DESAFIO
+  const handleRemove = (id) => {
+    httpConfig(id, "DELETE");
+
+  };
+
   return (
     <div className="App">
       <h1>Lista de produtos</h1>
@@ -73,13 +78,12 @@ function App() {
       {/* <div>  */}
       {(() => {
         if (loading && !error) {
-          return (
-            <p>Carregando os dados...</p>
-          )} else {
-            return <p>{error}</p>
-          }
+          return <p>Carregando os dados...</p>;
+        } else {
+          return <p>{error}</p>;
+        }
       })()}
-    {/* </div> */}
+      {/* </div> */}
       {/* {error && <p>{error}</p>} */}
       {!error && (
         <ul>
@@ -90,6 +94,10 @@ function App() {
             ) => (
               <li key={product.id}>
                 {product.name} - R$: {product.price}
+                {/* Quando tem que mandar alguma parâmetro na função do onClick, tem que ser por arrow function */}
+                <button style={{marginLeft: "1em"}} onClick={() => handleRemove(product.id)}> 
+                  Deletar
+                </button>
               </li>
             ))}
         </ul>
