@@ -5,20 +5,20 @@ import { useEffect, useState } from "react";
 //Aula 7 - Custom hook
 export const useFetch = (url) => {
   const [data, setData] = useState(null); //Já que não sabe o que é ainda, é 'null'. Nem string, nem array
-  
+
   // Aula 8 - Refatorando o post
   const [config, setConfig] = useState(null); //Responsável para configurar o método, cabeçalhos...
   const [method, setMethod] = useState(null); //Responsável para configurar o método, GET ou POST
   const [callFetch, setCallFetch] = useState(false); //Dizer quando o fetch for alterado. Usado como dependência
-  
+
   // Aula 9 - Loading
   const [loading, setLoading] = useState(false);
-  
+
   // Aula 10 - Tratando erro
   const [error, setError] = useState(null);
-  
+
   // Aula 11 - DESAFIO
-  const [itemId, setItemId] = useState(null)
+  const [itemId, setItemId] = useState(null);
 
   // ___________________________________________________________________________________Configuração____________________________________________________________
   const httpConfig = (data, method) => {
@@ -36,14 +36,14 @@ export const useFetch = (url) => {
       // Aula 11 - DESAFIO
     } else if (method === "DELETE") {
       setConfig({
-        method, //Já que o método já é o post, não precisa fazer 'method: 'POST''. Assimila o valor naturalmente
+        method,
         headers: {
           "Content-type": "application/json",
         },
       }); //O DELETE NÂO POSSUI BODY, POIS NÃO HÁ DADOS
 
       setMethod(method);
-      setItemId(data)
+      setItemId(data);
     }
   };
 
@@ -80,16 +80,14 @@ export const useFetch = (url) => {
         let fetchOptions = [url, config]; //Pode pegar uma url diferente e uma configuração diferente        const res = await fetch(...fetchOptions);
         const res = await fetch(...fetchOptions);
         json = await res.json();
-        
+
         setCallFetch(json);
-      
       } else if (method === "DELETE") {
-        const deleteUrl = `${url}/${itemId}`
-        const res = await fetch(deleteUrl, config)
-        json = await res.json()
-           
-      } 
-      setCallFetch(json)
+        const deleteUrl = `${url}/${itemId}`;
+        const res = await fetch(deleteUrl, config);
+        json = await res.json();
+      }
+      setCallFetch(json);
     };
 
     httpRequest();
